@@ -6,7 +6,7 @@
     <title>Siento</title>
 
     <!-- Enlace al archivo CSS -->
-    <style>
+        <<style>
         @import url("//fonts.googleapis.com/css?family=Inconsolata:700|Raleway:400,700");
 
         body {
@@ -47,8 +47,6 @@
             color: #fff;
             text-decoration: none;
             margin-top: 20px;
-            opacity: 0;
-            transition: opacity 1s ease-in-out, background-color 0.5s ease-in-out;
             position: absolute;
             bottom: 20px;
             left: 50%;
@@ -59,7 +57,12 @@
             padding: 10px 20px;
             background-color: #230d4d;
             border-radius: 10px;
-            font-size: 20px;
+            opacity: 1; /* Hacemos el enlace visible por defecto */
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        a:hover {
+            background-color: #1a0741; /* Cambiamos el color al pasar el mouse */
         }
 
         /* Estilos adicionales para hacerlo responsive */
@@ -71,18 +74,14 @@
             a {
                 font-size: 18px;
             }
-            
-            /* Asegura que el enlace sea visible en dispositivos móviles */
-            a {
-                opacity: 1 !important;
-            }
         }
 
     </style>
-
-
 </head>
 <body>
+    <canvas></canvas>
+    <p></p>
+    <a href="flor.html" target="_blank">CONTINUAR ;)</a>
     <canvas></canvas>
     <p></p>
     <script>
