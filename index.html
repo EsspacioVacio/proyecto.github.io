@@ -92,7 +92,7 @@
         a.target = '_blank';
         a.textContent = 'CONTINUAR ;)';
         document.body.appendChild(a);
-
+        a.style.display = 'block';
         const colors = [
             'red',
             'green',
@@ -155,9 +155,10 @@
                                 setTimeout(() => {
                                     a.style.display = 'block';
                                     setTimeout(() => {
+                                        a.style.transition = 'opacity 1s ease-in-out';
                                         a.style.opacity = '1';
                                     }, 100);
-                                }, 95000); // 1 minuto
+                                }, 5000); // 1 minuto
                             }
                         }
                     } else {
