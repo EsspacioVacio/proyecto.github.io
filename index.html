@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siento</title>
+
+    <!-- Enlace al archivo CSS -->
+    <style>
+        @import url("//fonts.googleapis.com/css?family=Inconsolata:700");
+
+        body {
+            background-color: #111;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        p {
+            font-family: Inconsolata, source code pro, consolas, monospace;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 80%;
+            position: relative;
+            z-index: 1;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, background-color 0.5s ease-in-out;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            font-family: 'Raleway', sans-serif; /* Cambio de fuente a Raleway */
+            font-size: 20px;
+            font-weight: bold;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #230d4d; /* Turquesa neón */
+            border-radius: 10px;
+            font-size: 20px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <canvas></canvas>
+    <p></p>
+    <script>
+        const prefix = 'Cariño mio,'
+        const skills = [
+            'Este es tu regalo, espero te guste',
+            'No brillante, ni costoso',
+            'Solo palabras que expresan lo hermoso',
+            'Te ofrezco versos sinceros',
+            'Un regalo eterno',
+            'No hay riquezas',
+            'Pero en la palabra',
+            'Te entrego mi esencia',
+            'Con Pasion y Amor',
+            'Da click y continua, aun hay un poco mas :D'
+        ].map(s => `${s}.`)
+        const delay = 2
+        const step = 1
+        const tail = 5
+        const timeout = 75
+
+        const p = document.querySelector('p');
+        const canvas = document.querySelector('canvas');
+        const a = document.createElement('a');
+        a.href = 'flor.html';
+        a.target = '_blank';
+        a.textContent = 'CONTINUAR ;)';
+        document.body.appendChild(a);
+
+        const colors = [
+            'red',
+            'green',
+            'blue',
+            'yellow',
+            'cyan',
+            'magenta',
+        ]
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)]
+        }
+        function getRandomChar() {
+            return String.fromCharCode(Math.random() * (127 - 33) + 33)
+        }
+        function getRandomColoredString(n) {
+            const fragment = document.createDocumentFragment()
+            for (let i = 0; i < n; i++) {
+                const char = document.createElement('span')
+                char.textContent = getRandomChar()
+                char.style.color = getRandomColor()
+                fragment.appendChild(char)
+            }
+            return fragment
+        }
+
+        const $ = {
+            text: '',
+            prefixP: -tail,
+            skillI: 0,
+            skillP: 0,
+            direction: 'forward',
+            delay,
+            step,
+        }
+
+        function render() {
+            const skill = skills[$.skillI]
+
+            if ($.step) {
+                $.step--;
+            } else {
+                $.step = step;
+                if ($.prefixP < prefix.length) {
+                    if ($.prefixP >= 0) {
+                        $.text += prefix[$.prefixP];
+                    }
+                    $.prefixP++;
+                } else {
+                    if ($.direction === 'forward') {
+                        if ($.skillP < skill.length) {
+                            $.text += skill[$.skillP];
+                            $.skillP++;
+                        } else {
+                            if ($.delay) {
+                                $.delay--;
+                            } else {
+                                $.direction = 'backward';
+                                $.delay = delay;
+                                // Mostrar gradualmente el enlace después de cierto tiempo
+                                setTimeout(() => {
+                                    a.style.display = 'block';
+                                    setTimeout(() => {
+                                        a.style.opacity = '1';
+                                    }, 100);
+                                }, 95000); // 1 minuto
+                            }
+                        }
+                    } else {
+                        if ($.skillP > 0) {
+                            $.text = $.text.slice(0, -1);
+                            $.skillP--;
+                        } else {
+                            $.skillI = ($.skillI + 1) % skills.length;
+                            if ($.skillI === 0) {
+                                // Detén la animación cuando se alcanza la última frase
+                                fadeOut();
+                                return;
+                            }
+                            $.direction = 'forward';
+                        }
+                    }
+                }
+            }
+
+            p.textContent = $.text;
+            p.appendChild(getRandomColoredString(
+                $.prefixP < prefix.length ?
+                    Math.min(tail, tail + $.prefixP) :
+                    Math.min(tail, skill.length - $.skillP)));
+            setTimeout(render, timeout);
+        }
+
+        function fadeOut() {
+            const fadeOutInterval = setInterval(() => {
+                p.style.opacity -= 0.05;
+                if (p.style.opacity <= 0) {
+                    clearInterval(fadeOutInterval);
+                    showCanvasAnimation();
+                }
+            }, 100);
+        }
+
+        function showCanvasAnimation() {
+            var a = canvas.getContext('2d');
+            var e, h, O, Q, v, M, R, C, Y, i, x, y, H, S, B, f, k, T, N, D, E, G, u, q;
+
+            e = [];
+            h = [];
+            O = canvas.width = window.innerWidth;
+            Q = canvas.height = window.innerHeight;
+            v = 32;
+            M = Math;
+            R = M.random;
+            C = M.cos;
+            Y = 6.3;
+
+            for (i = 0; i < Y; i += 0.2)
+                h.push([O / 2 + 180 * M.pow(M.sin(i), 3),
+                    Q / 2 + 10 * -(15 * C(i) - 5 * C(2 * i) - 2 * C(3 * i) - C(4 * i))]);
+
+            for (i = 0; i < v;) {
+                x = R() * O;
+                y = R() * Q;
+                H = 80 * (i / v) + 280;
+                S = 40 * R() + 60;
+                B = 60 * R() + 20;
+                f = [];
+                for (k = 0; k < v;) f[k++] = {
+                    x: x,
+                    y: y,
+                    X: 0,
+                    Y: 0,
+                    R: 1 - k / v + 1,
+                    S: R() + 1,
+                    q: ~~(R() * v),
+                    D: 2 * (i % 2) - 1,
+                    F: 0.2 * R() + 0.7,
+                    f: "hsla(" + ~~H + "," + ~~S + "%," + ~~B + "%,.1)"
+                };
+                e[i++] = f
+            }
+
+            function _(d) {
+                a.fillStyle = d.f;
+                a.beginPath();
+                a.arc(d.x, d.y, d.R, 0, Y, 1);
+                a.closePath();
+                a.fill()
+            }
+            setInterval(function () {
+                a.fillStyle = "rgba(0,0,0,.2)";
+                a.fillRect(0, 0, O, Q);
+                for (i = v; i--;) {
+                    f = e[i];
+                    u = f[0];
+                    q = h[u.q];
+                    D = u.x - q[0];
+                    E = u.y - q[1];
+                    G = M.sqrt(D * D + E * E);
+                    10 > G && (0.95 < R() ? u.q = ~~(R() * v) : (0.99 < R() && (u.D *= -1), u.q += u.D, u.q %= v, 0 > u.q && (u.q += v)));
+                    u.X += -D / G * u.S;
+                    u.Y += -E / G * u.S;
+                    u.x += u.X;
+                    u.y += u.Y;
+                    _(u);
+                    u.X *= u.F;
+                    u.Y *= u.F;
+                    for (k = 0; k < v - 1;) T = f[k], N = f[++k], N.x -= 0.7 * (N.x - T.x), N.y -= 0.7 * (N.y - T.y), _(N)
+                }
+            }, 25);
+        }
+
+        setTimeout(render, 500);
+    </script>
+</body>
+</html>
+
+
